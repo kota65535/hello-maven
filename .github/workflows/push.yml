@@ -1,10 +1,8 @@
 name: Release
 
 on:
-  pull_request:
-    branches:
-      - master
-    types: [closed]
+  push:
+    branches: [master]
 
 jobs:
   build:
@@ -33,7 +31,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
           RELEASE_VERSION=${{ github.event.pull_request.title }}
-          mvn -B -s .github/workflows/settings.xml release:prepare release:perform \
-            -DreleaseVersion=${RELEASE_VERSION} \
-            -Dtag=v${RELEASE_VERSION} \
-            -Darguments=-DskipTests
+          mvn -B -s .github/workflows/settings.xml release:prepare release:perform
