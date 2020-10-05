@@ -27,10 +27,9 @@ jobs:
           git config --global author.name "${GITHUB_ACTOR}"
       - name: Build with Maven
         env:
+          # Use Personal Token for now
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
-          RELEASE_VERSION=${{ github.event.pull_request.title }}
-          mvn -B -s .github/workflows/settings.xml release:prepare release:perform
           mvn -B build-helper:parse-version release:prepare release:perform \
             -DreleaseVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} \
             -Dtag=v\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}
