@@ -1,14 +1,15 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches:
-      - 'release/**'
-      - 'releases/**'
+      - master
+    types: [closed]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
@@ -27,19 +28,12 @@ jobs:
           git config --global committer.name "GitHub"
           git config --global author.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global author.name "${GITHUB_ACTOR}"
-#      - name: Build with Maven
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-#        run: |
-#          RELEASE_VERSION=${GITHUB_REF##*/}
-#          mvn -B -s .github/workflows/settings.xml release:prepare release:perform \
-#            -DreleaseVersion=${RELEASE_VERSION} \
-#            -Dtag=v${RELEASE_VERSION} \
-#            -Darguments=-DskipTests
-      - name: Merge branch
+      - name: Build with Maven
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
-          git fetch
-          git checkout -t origin/master
-          git merge ${GITHUB_REF}
-          git push origin master
-
+          RELEASE_VERSION=${{ github.event.pull_request.title }}
+          mvn -B -s .github/workflows/settings.xml release:prepare release:perform \
+            -DreleaseVersion=${RELEASE_VERSION} \
+            -Dtag=v${RELEASE_VERSION} \
+            -Darguments=-DskipTests
