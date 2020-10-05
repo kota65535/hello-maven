@@ -26,15 +26,15 @@ jobs:
           git config --global committer.name "GitHub"
           git config --global author.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global author.name "${GITHUB_ACTOR}"
-      - name: Build with Maven
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        run: |
-          RELEASE_VERSION=${GITHUB_REF##*/}
-          mvn -B -s .github/workflows/settings.xml release:prepare release:perform \
-            -DreleaseVersion=${RELEASE_VERSION} \
-            -Dtag=v${RELEASE_VERSION} \
-            -Darguments=-DskipTests
+#      - name: Build with Maven
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+#        run: |
+#          RELEASE_VERSION=${GITHUB_REF##*/}
+#          mvn -B -s .github/workflows/settings.xml release:prepare release:perform \
+#            -DreleaseVersion=${RELEASE_VERSION} \
+#            -Dtag=v${RELEASE_VERSION} \
+#            -Darguments=-DskipTests
       - name: Merge branch
         run: |
           git fetch
