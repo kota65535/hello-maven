@@ -31,3 +31,7 @@ jobs:
         run: |
           RELEASE_VERSION=${{ github.event.pull_request.title }}
           mvn -B -s .github/workflows/settings.xml release:prepare release:perform
+          mvn -B build-helper:parse-version release:prepare release:perform \
+            -DreleaseVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}
+            -Dtag=v\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}
+
