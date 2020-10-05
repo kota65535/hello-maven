@@ -29,11 +29,10 @@ jobs:
       - name: Build with Maven
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        run: mvn -B deploy
-#        run: |
-#          cat .github/workflows/settings.xml
-#          RELEASE_VERSION=${GITHUB_REF##*/}
-#          mvn -B -s .github/workflows/settings.xml release:prepare release:perform \
-#            -DreleaseVersion=${RELEASE_VERSION} \
-#            -Dtag=v${RELEASE_VERSION} \
-#            -Darguments=-DskipTests
+        run: |
+          cat .github/workflows/settings.xml
+          RELEASE_VERSION=${GITHUB_REF##*/}
+          mvn -B -s .github/workflows/settings.xml release:prepare release:perform \
+            -DreleaseVersion=${RELEASE_VERSION} \
+            -Dtag=v${RELEASE_VERSION} \
+            -Darguments=-DskipTests
