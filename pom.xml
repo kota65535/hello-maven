@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>jp.co.sre.aip.sample</groupId>
-    <artifactId>sample-maven</artifactId>
+    <groupId>com.kota65535</groupId>
+    <artifactId>hello-maven</artifactId>
     <version>0.0.18-SNAPSHOT</version>
 
     <properties>
@@ -13,9 +13,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/sre-holdings/sample-service</connection>
-        <developerConnection>scm:git:https://github.com/sre-holdings/sample-service</developerConnection>
-        <url>https://github.com/sre-holdings/sample-service</url>
+        <connection>scm:git:https://github.com/kota65535/hello-maven</connection>
+        <developerConnection>scm:git:https://github.com/kota65535/hello-maven</developerConnection>
+        <url>https://github.com/kota65535/hello-maven</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -23,7 +23,7 @@
         <repository>
             <id>github</id>
             <name>SRE GitHub Maven Repository</name>
-            <url>https://maven.pkg.github.com/sre-holdings/maven-repository</url>
+            <url>https://maven.pkg.github.com/kota65535/maven-repository</url>
         </repository>
     </distributionManagement>
 
